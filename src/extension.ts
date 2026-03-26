@@ -1,0 +1,69 @@
+import * as path from 'path';
+import * as vscode from 'vscode';
+import { ExtensionContext } from 'vscode';
+import {
+	LanguageClient,
+	LanguageClientOptions,
+	ServerOptions,
+	TransportKind
+} from 'vscode-languageclient/node';
+
+let client: LanguageClient;
+const outputChannel = vscode.window.createOutputChannel("Ren'Py LSP");
+
+export function activate(context: ExtensionContext) {
+	outputChannel.appendLine("Activating Ren'Py Language Support...");
+	// Path to the server module
+	const serverModule = context.asAbsolutePath(path.join('out', 'server', 'server.js'));
+
+	// Server options - run the server as a Node module
+	const serverOptions: ServerOptions = {
+		run: {
+			module: serverModule,
+			transport: TransportKind.ipc
+		},
+		debug: {
+			module: serverModule,
+			transport: TransportKind.ipc,
+			options: {
+				execArgv: ['--nolazy', '--inspect=6009']
+			}
+		}
+	};
+
+	// Client options
+	const clientOptions: LanguageClientOptions = {
+		// Register the server for Ren'Py files
+		documentSelector: [
+			{ scheme: 'file', language: 'renpy' }
+		],
+		synchronize: {
+			// Watch for .rpy file changes
+			fileEvents: undefined
+		}
+	};
+
+	// Create and start the client
+	client = new LanguageClient(
+		'renpyLanguageServer',
+		"Ren'Py Language Server",
+		serverOptions,
+		clientOptions
+	);
+
+	// Start the client (also starts the server)
+	client.start().then(() => {
+		outputChannel.appendLine("Language server started successfully!");
+	}).catch((error) => {
+		outputChannel.appendLine("Failed to start language server: " + error);
+	});
+
+	outputChannel.appendLine("Ren'Py Language Support is now active!");
+}
+
+export function deactivate(): Thenable<void> | undefined {
+	if (!client) {
+		return undefined;
+	}
+	return client.stop();
+}

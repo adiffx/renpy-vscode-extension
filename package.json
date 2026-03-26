@@ -1,0 +1,61 @@
+{
+  "name": "renpy-language-support",
+  "displayName": "Ren'Py Language Support",
+  "description": "Language support for Ren'Py visual novel engine",
+  "version": "0.1.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:renpy"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "renpy",
+        "aliases": [
+          "Ren'Py",
+          "renpy"
+        ],
+        "extensions": [
+          ".rpy",
+          ".rpym"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "renpy",
+        "scopeName": "source.renpy",
+        "path": "./syntaxes/renpy.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./ && cp src/server/renpy-api.json out/server/",
+    "watch": "tsc -watch -p ./",
+    "test": "jest",
+    "fetch-api": "npx ts-node scripts/fetch-renpy-docs.ts"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1",
+    "vscode-languageserver": "^9.0.1",
+    "vscode-languageserver-textdocument": "^1.0.11",
+    "vscode-uri": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.75.0",
+    "jest": "^30.3.0",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.3.0"
+  }
+}
