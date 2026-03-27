@@ -1,14 +1,40 @@
 {
   "name": "renpy-language-support",
-  "displayName": "Ren'Py Language Support",
-  "description": "Language support for Ren'Py visual novel engine",
+  "displayName": "Ren'Py Magic",
+  "description": "Complete language support for Ren'Py visual novel engine - syntax highlighting, completions, hover docs, go-to-definition, and diagnostics",
   "version": "0.1.0",
-  "publisher": "local",
+  "publisher": "adiffx",
+  "author": {
+    "name": "adiffx"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adiffx/renpy-vscode-extension"
+  },
+  "bugs": {
+    "url": "https://github.com/adiffx/renpy-vscode-extension/issues"
+  },
+  "homepage": "https://github.com/adiffx/renpy-vscode-extension#readme",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#2d2d2d",
+    "theme": "dark"
+  },
+  "keywords": [
+    "renpy",
+    "ren'py",
+    "visual novel",
+    "game development",
+    "atl"
+  ],
   "engines": {
     "vscode": "^1.75.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Linters",
+    "Snippets"
   ],
   "activationEvents": [
     "onLanguage:renpy"
@@ -42,7 +68,9 @@
     "compile": "tsc -p ./ && cp src/server/renpy-api.json out/server/",
     "watch": "tsc -watch -p ./",
     "test": "jest",
-    "fetch-api": "npx ts-node scripts/fetch-renpy-docs.ts"
+    "fetch-api": "npx ts-node scripts/fetch-renpy-docs.ts",
+    "package": "vsce package",
+    "publish": "vsce publish"
   },
   "dependencies": {
     "vscode-languageclient": "^9.0.1",
@@ -54,6 +82,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^20.10.0",
     "@types/vscode": "^1.75.0",
+    "@vscode/vsce": "^3.7.1",
     "jest": "^30.3.0",
     "ts-jest": "^29.4.6",
     "typescript": "^5.3.0"
