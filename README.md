@@ -22,8 +22,10 @@ I kept adding things as I needed them while working on projects, and over time i
 
 ### 📖 Hover Documentation
 
+<img src="./images/screenshots/InlineDocumentation.png" width="50%" />
+
 * Hover over keywords, functions, and classes to view inline documentation
-* Covers **730+ API entries** sourced from official Ren’Py docs:
+* Covers **730+ API entries** sourced from official Ren'Py docs:
 
 | Category             | Entries | Examples                             |
 | -------------------- | ------- | ------------------------------------ |
@@ -43,6 +45,8 @@ Also includes:
 
 #### Go to Symbol (`Cmd+Shift+O` / `Ctrl+Shift+O`)
 
+<img src="./images/screenshots/JumpToLabel.png" width="50%" />
+
 Jump to:
 
 * Labels (including local labels like `.label`)
@@ -53,12 +57,16 @@ Jump to:
 
 #### Workspace Symbol Search (`Cmd+T` / `Ctrl+T`)
 
+<img src="./images/screenshots/WorkspaceSymbolSearch.png" width="50%" />
+
 Search across all `.rpy` files:
 
 * Labels, screens, images
 * Python functions and classes
 
 #### Go to Definition (`F12`)
+
+<img src="./images/screenshots/JumpToDefinition.png" width="50%" />
 
 Navigate directly to definitions of:
 
@@ -82,6 +90,8 @@ Navigate directly to definitions of:
 
 ### ⚡ Intelligent Completions
 
+<img src="./images/screenshots/BuiltinAutocompletion.png" width="50%" />
+
 Context-aware suggestions for:
 
 * Ren’Py keywords and statements
@@ -93,6 +103,8 @@ Context-aware suggestions for:
 * Built-in Ren’Py API
 
 **Namespace support**
+
+<img src="./images/screenshots/CustomAutocompletion.png" width="50%" />
 
 * Type `config.`, `gui.`, or `build.` to browse all variables
 
@@ -112,6 +124,8 @@ Inline parameter hints for 60+ functions, including:
 * Image tools: `im.Composite()`, `LiveComposite()`
 
 ### ⚠️ Diagnostics
+
+<img src="./images/screenshots/InvalidAsset.png" width="50%" />
 
 Real-time feedback with:
 
