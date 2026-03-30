@@ -21,7 +21,7 @@ I kept adding things as I needed them while working on projects, and over time i
 
 ### 📖 Hover Documentation
 
-<img src="./images/screenshots/InlineDocumentation.png" width="50%" />
+<img src="./images/screenshots/InlineDocumentation.png" width="642" />
 
 * Hover over keywords, functions, and classes to view inline documentation
 * Covers **730+ API entries** sourced from official Ren'Py docs:
@@ -44,7 +44,7 @@ Also includes:
 
 #### Go to Symbol (`Cmd+Shift+O` / `Ctrl+Shift+O`)
 
-<img src="./images/screenshots/JumpToLabel.png" width="50%" />
+<img src="./images/screenshots/JumpToLabel.png" width="607" />
 
 Jump to:
 
@@ -56,7 +56,7 @@ Jump to:
 
 #### Workspace Symbol Search (`Cmd+T` / `Ctrl+T`)
 
-<img src="./images/screenshots/WorkspaceSymbolSearch.png" width="50%" />
+<img src="./images/screenshots/WorkspaceSymbolSearch.png" width="601" />
 
 Search across all `.rpy` files:
 
@@ -65,7 +65,7 @@ Search across all `.rpy` files:
 
 #### Go to Definition (`F12`)
 
-<img src="./images/screenshots/JumpToDefinition.png" width="50%" />
+<img src="./images/screenshots/JumpToDefinition.png" width="670" />
 
 Navigate directly to definitions of:
 
@@ -89,9 +89,9 @@ Navigate directly to definitions of:
 
 ### ⚡ Intelligent Completions
 
-<img src="./images/screenshots/BuiltinAutocompletion.png" width="50%" />
+<img src="./images/screenshots/BuiltinAutocompletion.png" width="856" />
 
-<img src="./images/screenshots/CustomAutocompletion.png" width="50%" />
+<img src="./images/screenshots/CustomAutocompletion.png" width="329" />
 
 Context-aware suggestions for:
 
@@ -116,7 +116,7 @@ Inline parameter hints for 60+ functions, including:
 
 ### ⚠️ Diagnostics
 
-<img src="./images/screenshots/InvalidAsset.png" width="50%" />
+<img src="./images/screenshots/InvalidAsset.png" width="450" />
 
 Real-time feedback with:
 
