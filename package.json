@@ -2,7 +2,7 @@
   "name": "renpy-language-support",
   "displayName": "Ren'Py Magic",
   "description": "Complete language support for Ren'Py visual novel engine - syntax highlighting, completions, hover docs, go-to-definition, and diagnostics",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "publisher": "adiffx",
   "author": {
     "name": "adiffx"
@@ -10,10 +10,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/adiffx/renpy-vscode-extension"
+    "url": "https://github.com/adiffx/renpy-magic"
   },
   "bugs": {
-    "url": "https://github.com/adiffx/renpy-vscode-extension/issues"
+    "url": "https://github.com/adiffx/renpy-magic/issues"
   },
   "homepage": "https://adiffx.com/renpy-magic/",
   "icon": "images/icon.png",
