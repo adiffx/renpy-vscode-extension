@@ -1,102 +1,157 @@
-# Ren'Py Language Support
+# <img src="./images/full_icon.png" style="height: 30px;"/> Ren'Py Language Support
 
-A Visual Studio Code extension providing language support for [Ren'Py](https://www.renpy.org/) visual novel engine.
+A Visual Studio Code extension that adds rich language support for the Ren’Py visual novel engine.
 
-## Features
+I originally made this for myself after running into a few small annoyances with existing extensions — mainly wanting to jump to symbols with `Cmd+R`, check whether an image reference actually exists, and jump to image definitions with `F12`.
 
-### Syntax Highlighting
-- Full syntax highlighting for `.rpy` and `.rpym` files
-- Supports Ren'Py keywords, ATL (Animation and Transformation Language), Python blocks
-- String interpolation and text tags highlighted within strings
+I kept adding things as I needed them while working on projects, and over time it just grew into something more complete. It’s still very much shaped by what I personally find useful, but it might be helpful to others too. It's powered by a proper language server (LSP), which makes features like navigation, diagnostics, and completions more consistent and reliable.
 
-### Hover Documentation
-- Hover over Ren'Py keywords, functions, and classes to see documentation
-- Covers 730+ API entries fetched from official Ren'Py documentation:
-  - **config.\*** variables (286 entries): `config.name`, `config.screen_width`, etc.
-  - **gui.\*** variables (107 entries): `gui.text_color`, `gui.show_name`, etc.
-  - **build.\*** variables (18 entries): `build.name`, `build.directory_name`, etc.
-  - **Actions** (47 entries): `Jump`, `Call`, `Show`, `Hide`, `Set`, `Return`, etc.
-  - **Style properties** (129 entries): `background`, `padding`, `color`, etc.
-  - **Transform properties** (52 entries): `xpos`, `ypos`, `alpha`, `zoom`, etc.
-  - **Classes and transitions**: `Transform`, `Dissolve`, `Fade`, etc.
-- Supports dotted names: hover over `config.name` to see full documentation
+## ✨ Features
 
-### Go to Symbol in Editor (Cmd+Shift+O / Ctrl+Shift+O)
-- Jump to labels, screens, transforms, images, defines, defaults, styles, and layeredimages within the current file
-- Supports local labels (`.labelname`)
+### 🎨 Syntax Highlighting
 
-### Workspace Symbol Search (Cmd+T / Ctrl+T)
-- Search for symbols across all `.rpy` files in your workspace
-- Find labels, screens, transforms, images, defines, defaults, styles, layeredimages, and Python functions/classes
+* Full highlighting for `.rpy` and `.rpym` files
+* Supports:
 
-### Go to Definition (F12)
-- Jump to the definition of:
-  - Labels (from `jump` or `call` statements)
-  - Screens (from `show screen`, `call screen`, or `use` statements)
-  - Images (from `show`, `scene`, or `hide` statements)
-  - Transforms
-  - Python functions and variables
-- Flexible image name matching handles Ren'Py's space-separated image naming
+  * Ren’Py script syntax
+  * ATL (Animation and Transformation Language)
+  * Embedded Python blocks
+* Highlights string interpolation and text tags inside dialogue
 
-### Find All References (Shift+F12)
-- Find all usages of a symbol across your workspace
-- Works for labels, screens, images, and variables
+### 📖 Hover Documentation
 
-### Rename Symbol (F2)
-- Rename a label, screen, or variable and update all references across the workspace
+* Hover over keywords, functions, and classes to view inline documentation
+* Covers **730+ API entries** sourced from official Ren’Py docs:
 
-### Completions
-- Context-aware completions for:
-  - Ren'Py keywords and statements
-  - ATL keywords
-  - Transform properties (after `at` or in transform blocks)
-  - Style properties (in style blocks)
-  - Screen properties and `style_prefix` values
-  - Built-in transitions (after `with`)
-  - Labels (after `jump` or `call`)
-  - Screens (after `call screen` or `show screen`)
-  - Built-in Ren'Py API
-- **Namespace completions**: Type `config.`, `gui.`, or `build.` to see all available variables
-- Smart suppression: completions stop after completing a `config.xxx =` assignment
+| Category             | Entries | Examples                             |
+| -------------------- | ------- | ------------------------------------ |
+| `config.*`           | 286     | `config.name`, `config.screen_width` |
+| `gui.*`              | 107     | `gui.text_color`, `gui.show_name`    |
+| `build.*`            | 18      | `build.name`, `build.directory_name` |
+| Actions              | 47      | `Jump`, `Call`, `Show`, `Hide`       |
+| Style properties     | 129     | `background`, `padding`, `color`     |
+| Transform properties | 52      | `xpos`, `ypos`, `zoom`, `alpha`      |
 
-### Signature Help
-- Parameter hints when typing function calls
-- Covers 60+ Ren'Py functions including:
-  - Transitions: `Dissolve()`, `Fade()`, `ImageDissolve()`, etc.
-  - Displayables: `Character()`, `Transform()`, `Text()`, `Frame()`, etc.
-  - Actions: `SetVariable()`, `Jump()`, `Call()`, `Show()`, `Hide()`, etc.
-  - `renpy.*` functions: `renpy.pause()`, `renpy.say()`, `renpy.show()`, etc.
-  - `renpy.music.*` and `renpy.sound.*` functions
-  - Image manipulation: `im.Composite()`, `im.Scale()`, `LiveComposite()`, etc.
+Also includes:
 
-### Diagnostics
-- Warnings for:
-  - Undefined labels in `jump`/`call` statements
-  - Undefined local labels (`.labelname`)
-  - Undefined screens in `call screen`, `show screen`, or `use` statements
-- Errors for:
-  - Mismatched quotes (with proper handling of triple-quoted strings)
-- Recognizes built-in screens: `save`, `load`, `preferences`, `main_menu`, `game_menu`, `confirm`, `history`, `quick_menu`, etc.
-- Recognizes built-in images: `black`, `white`, `transparent`
-- Properly skips diagnostics inside comments and multiline strings
+* Classes and transitions (`Transform`, `Dissolve`, `Fade`, etc.)
+* Full support for dotted names (e.g. `config.name`)
 
-## Installation
+### 🔎 Navigation & Code Intelligence
+
+#### Go to Symbol (`Cmd+Shift+O` / `Ctrl+Shift+O`)
+
+Jump to:
+
+* Labels (including local labels like `.label`)
+* Screens
+* Transforms
+* Images
+* Styles, defines, defaults, layeredimages
+
+#### Workspace Symbol Search (`Cmd+T` / `Ctrl+T`)
+
+Search across all `.rpy` files:
+
+* Labels, screens, images
+* Python functions and classes
+
+#### Go to Definition (`F12`)
+
+Navigate directly to definitions of:
+
+* Labels (`jump`, `call`)
+* Screens (`show screen`, `call screen`, `use`)
+* Images (`show`, `scene`, `hide`)
+* Transforms and variables
+
+✔ Handles Ren’Py’s flexible image naming (space-separated names)
+
+### 🔁 Refactoring Tools
+
+#### Find All References (`Shift+F12`)
+
+* Locate all usages of labels, screens, images, and variables
+
+#### Rename Symbol (`F2`)
+
+* Rename labels, screens, and variables
+* Automatically updates all references across the workspace
+
+### ⚡ Intelligent Completions
+
+Context-aware suggestions for:
+
+* Ren’Py keywords and statements
+* ATL syntax
+* Transform and style properties
+* Screen properties and `style_prefix` values
+* Transitions (after `with`)
+* Labels and screens in relevant contexts
+* Built-in Ren’Py API
+
+**Namespace support**
+
+* Type `config.`, `gui.`, or `build.` to browse all variables
+
+**Smart behaviour**
+
+* Suppresses suggestions after assignments like `config.xxx =`
+
+### ✍️ Signature Help
+
+Inline parameter hints for 60+ functions, including:
+
+* Transitions: `Dissolve()`, `Fade()`, `ImageDissolve()`
+* Displayables: `Character()`, `Transform()`, `Text()`
+* Actions: `Jump()`, `Call()`, `SetVariable()`
+* `renpy.*` APIs (`renpy.pause()`, `renpy.show()`, etc.)
+* Audio APIs: `renpy.music.*`, `renpy.sound.*`
+* Image tools: `im.Composite()`, `LiveComposite()`
+
+### ⚠️ Diagnostics
+
+Real-time feedback with:
+
+**Warnings**
+
+* Undefined labels (`jump`, `call`)
+* Undefined local labels (`.label`)
+* Missing screens (`call screen`, `show screen`, `use`)
+
+**Errors**
+
+* Mismatched quotes (including triple-quoted strings)
+
+**Built-in awareness**
+
+* Screens: `save`, `load`, `preferences`, `main_menu`, etc.
+* Images: `black`, `white`, `transparent`
+
+✔ Ignores comments and multiline strings correctly
+
+## 🚀 Installation
 
 ### From Source (Development)
 
-1. Clone or download this repository
-2. Open the folder in VS Code
-3. Run `npm install` to install dependencies
-4. Run `npm run compile` to build
-5. Press F5 to launch the Extension Development Host
+```bash
+git clone <repo-url>
+cd <repo-folder>
+npm install
+npm run compile
+```
 
-### Usage
+Then press `F5` in VS Code to launch the Extension Development Host.
+
+## 🧪 Usage
 
 1. Open a folder containing `.rpy` files
-2. The extension activates automatically when you open a Ren'Py file
-3. If you have another Ren'Py extension installed, you may need to disable it to avoid conflicts
+2. Open any Ren’Py file
+3. The extension activates automatically
 
-## Development
+> ⚠️ If you have another Ren’Py extension installed, disable it to avoid conflicts
+
+## 🛠 Development
 
 ### Running Tests
 
@@ -104,35 +159,38 @@ A Visual Studio Code extension providing language support for [Ren'Py](https://w
 npm test
 ```
 
-Tests cover:
-- Pattern matching for labels, screens, images, comments, multiline strings
-- Completion logic: namespace matching, suppression after assignments
-- Hover functionality: documentation lookup, namespace queries
-- Symbol extraction patterns for go-to-definition
-- Generated API data structure and content validation
+Tests include:
 
-### Updating API Documentation
+* Syntax pattern matching (labels, screens, images, comments)
+* Completion logic and suppression rules
+* Hover documentation lookup
+* Symbol extraction and indexing
+* API data validation
 
-The extension fetches API documentation from the official Ren'Py GitHub repository. To update:
+### Updating API Data
 
 ```bash
 npm run fetch-api
 npm run compile
 ```
 
-This fetches documentation from RST files and Ren'Py source code, generating `src/server/renpy-api.json`.
+This pulls documentation from Ren’Py source and RST files, generating:
 
-## Known Limitations
+```
+src/server/renpy-api.json
+```
 
-- Python code within Ren'Py files gets basic syntax highlighting but not full Python language server features
-- Image validation doesn't check for file-based images (only code-defined images)
-- Local label validation is file-scoped
+## ⚠️ Known Limitations
 
-## Requirements
+* Embedded Python does not use a full Python language server
+* Image validation only covers code-defined images
+* Local labels are validated per file (not across files)
 
-- VS Code 1.75.0 or higher
-- No external dependencies required (pure TypeScript implementation)
+## 📋 Requirements
 
-## License
+* VS Code **1.75.0+**
+* No external runtime dependencies (pure TypeScript implementation)
+
+## 📄 License
 
 MIT
