@@ -1,4 +1,4 @@
-# Ren'Py Language Support
+# Ren'Py Magic - VSCode extension for the Ren'Py language
 
 <img src="./images/full_icon.png" align="left" style="margin-right:15px; height: 100px; "/> 
  
