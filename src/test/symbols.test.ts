@@ -289,5 +289,46 @@ describe('Symbol Reference Patterns', () => {
 			expect(match).not.toBeNull();
 			expect(match![2].trim()).toBe('eileen');
 		});
+
+		it('should match show cg with transition', () => {
+			const match = '    show cg some_image with fade'.match(showImageRegex);
+			expect(match).not.toBeNull();
+			expect(match![1]).toBe('show');
+			expect(match![2].trim()).toBe('cg some_image');
+		});
+
+		it('should match multi-part image name', () => {
+			const match = '    show cg Kelly_Quickie_05_005 with fade'.match(showImageRegex);
+			expect(match).not.toBeNull();
+			expect(match![2].trim()).toBe('cg Kelly_Quickie_05_005');
+		});
+	});
+
+	describe('Show Screen Detection', () => {
+		const showScreenCheck = /^\s*show\s+screen\s/;
+		const showImageRegex = /^\s*(show|scene)\s+([a-zA-Z_][a-zA-Z0-9_ ]+?)(?:\s+(?:at|with|as|behind|onlayer|zorder)\b|$)/;
+
+		it('should detect show screen and exclude from image check', () => {
+			const line = '    show screen phone_message_screen';
+			const isShowScreen = showScreenCheck.test(line);
+			expect(isShowScreen).toBe(true);
+			// When isShowScreen is true, we skip the image regex
+		});
+
+		it('should not detect show image as show screen', () => {
+			const line = '    show cg some_image with fade';
+			const isShowScreen = showScreenCheck.test(line);
+			expect(isShowScreen).toBe(false);
+			// When isShowScreen is false, we proceed with image regex
+			const match = line.match(showImageRegex);
+			expect(match).not.toBeNull();
+			expect(match![2].trim()).toBe('cg some_image');
+		});
+
+		it('should not detect scene as show screen', () => {
+			const line = '    scene bg room with fade';
+			const isShowScreen = showScreenCheck.test(line);
+			expect(isShowScreen).toBe(false);
+		});
 	});
 });

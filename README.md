@@ -14,7 +14,6 @@ I kept adding things as I needed them while working on projects, and over time i
 
 * Full highlighting for `.rpy` and `.rpym` files
 * Supports:
-
   * Ren’Py script syntax
   * ATL (Animation and Transformation Language)
   * Embedded Python blocks
@@ -27,14 +26,14 @@ I kept adding things as I needed them while working on projects, and over time i
 * Hover over keywords, functions, and classes to view inline documentation
 * Covers **730+ API entries** sourced from official Ren'Py docs:
 
-| Category             | Entries | Examples                             |
-| -------------------- | ------- | ------------------------------------ |
-| `config.*`           | 286     | `config.name`, `config.screen_width` |
-| `gui.*`              | 107     | `gui.text_color`, `gui.show_name`    |
-| `build.*`            | 18      | `build.name`, `build.directory_name` |
-| Actions              | 47      | `Jump`, `Call`, `Show`, `Hide`       |
-| Style properties     | 129     | `background`, `padding`, `color`     |
-| Transform properties | 52      | `xpos`, `ypos`, `zoom`, `alpha`      |
+| Category             | Examples                             |
+| -------------------- | ------------------------------------ |
+| `config.*`           | `config.name`, `config.screen_width` |
+| `gui.*`              | `gui.text_color`, `gui.show_name`    |
+| `build.*`            | `build.name`, `build.directory_name` |
+| Actions              | `Jump`, `Call`, `Show`, `Hide`       |
+| Style properties     | `background`, `padding`, `color`     |
+| Transform properties | `xpos`, `ypos`, `zoom`, `alpha`      |
 
 Also includes:
 
@@ -92,25 +91,17 @@ Navigate directly to definitions of:
 
 <img src="./images/screenshots/BuiltinAutocompletion.png" width="50%" />
 
+<img src="./images/screenshots/CustomAutocompletion.png" width="50%" />
+
 Context-aware suggestions for:
 
-* Ren’Py keywords and statements
+* Ren’Py keywords and statements (eg. `config.`, `gui.`, or `build.`)
 * ATL syntax
 * Transform and style properties
 * Screen properties and `style_prefix` values
 * Transitions (after `with`)
 * Labels and screens in relevant contexts
 * Built-in Ren’Py API
-
-**Namespace support**
-
-<img src="./images/screenshots/CustomAutocompletion.png" width="50%" />
-
-* Type `config.`, `gui.`, or `build.` to browse all variables
-
-**Smart behaviour**
-
-* Suppresses suggestions after assignments like `config.xxx =`
 
 ### ✍️ Signature Help
 
@@ -138,13 +129,6 @@ Real-time feedback with:
 **Errors**
 
 * Mismatched quotes (including triple-quoted strings)
-
-**Built-in awareness**
-
-* Screens: `save`, `load`, `preferences`, `main_menu`, etc.
-* Images: `black`, `white`, `transparent`
-
-✔ Ignores comments and multiline strings correctly
 
 ## 🚀 Installation
 
@@ -174,14 +158,6 @@ Then press `F5` in VS Code to launch the Extension Development Host.
 ```bash
 npm test
 ```
-
-Tests include:
-
-* Syntax pattern matching (labels, screens, images, comments)
-* Completion logic and suppression rules
-* Hover documentation lookup
-* Symbol extraction and indexing
-* API data validation
 
 ### Updating API Data
 
