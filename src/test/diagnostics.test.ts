@@ -254,6 +254,69 @@ describe('Image Pattern Matching', () => {
 	});
 });
 
+describe('Cross-file Diagnostic Re-validation', () => {
+	// Simulates the symbol index and validation logic
+	type SymbolDef = { kind: string; uri: string };
+	const symbolIndex = new Map<string, SymbolDef[]>();
+
+	function addSymbol(name: string, kind: string, uri: string) {
+		const existing = symbolIndex.get(name) || [];
+		existing.push({ kind, uri });
+		symbolIndex.set(name, existing);
+	}
+
+	function removeSymbolsFromFile(uri: string) {
+		for (const [name, defs] of symbolIndex) {
+			const filtered = defs.filter(d => d.uri !== uri);
+			if (filtered.length === 0) {
+				symbolIndex.delete(name);
+			} else {
+				symbolIndex.set(name, filtered);
+			}
+		}
+	}
+
+	function isLabelDefined(name: string): boolean {
+		const defs = symbolIndex.get(name);
+		return !!defs && defs.some(d => d.kind === 'label');
+	}
+
+	beforeEach(() => {
+		symbolIndex.clear();
+	});
+
+	it('should find label after it is added to another file', () => {
+		// Initially the label is not defined
+		expect(isLabelDefined('chapter_title_card')).toBe(false);
+
+		// Simulate saving a file that defines the label
+		addSymbol('chapter_title_card', 'label', 'file:///game/utils.rpy');
+		expect(isLabelDefined('chapter_title_card')).toBe(true);
+	});
+
+	it('should lose label after its file is re-indexed without it', () => {
+		addSymbol('chapter_title_card', 'label', 'file:///game/utils.rpy');
+		expect(isLabelDefined('chapter_title_card')).toBe(true);
+
+		// Simulate re-indexing the file after the label was removed
+		removeSymbolsFromFile('file:///game/utils.rpy');
+		expect(isLabelDefined('chapter_title_card')).toBe(false);
+	});
+
+	it('should keep label if defined in multiple files', () => {
+		addSymbol('start', 'label', 'file:///game/script.rpy');
+		addSymbol('start', 'label', 'file:///game/alt.rpy');
+
+		removeSymbolsFromFile('file:///game/script.rpy');
+		expect(isLabelDefined('start')).toBe(true);
+	});
+
+	it('should not confuse screen definitions with labels', () => {
+		addSymbol('my_screen', 'screen', 'file:///game/screens.rpy');
+		expect(isLabelDefined('my_screen')).toBe(false);
+	});
+});
+
 describe('Quote Matching', () => {
 	it('should count quotes correctly', () => {
 		const line1 = '"Hello world"';
