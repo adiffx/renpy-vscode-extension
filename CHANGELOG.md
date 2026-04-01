@@ -1,6 +1,42 @@
 # Changelog
 
-All notable changes to the Ren'Py Language Support extension will be documented in this file.
+All notable changes to the Ren'Py Magic extension will be documented in this file.
+
+## [1.0.7] - Unreleased
+
+### Fixed
+- Auto-completion no longer triggers in wrong contexts (inside strings, on space for indentation)
+- Space trigger character now only activates for `jump` and `call` completions
+
+## [1.0.6] - 2026-03-30
+
+### Fixed
+- Documentation and metadata fixes
+
+## [1.0.5] - 2026-03-30
+
+### Fixed
+- Fixed repository name in metadata
+
+## [1.0.4] - 2026-03-30
+
+### Changed
+- Updated documentation and README with screenshots
+- Added more tests
+
+### Fixed
+- Fixed website build for image assets
+
+## [1.0.3] - 2026-03-30
+
+### Added
+
+- Optional `warnUndefinedImages` setting to warn when `show`/`scene` references an undefined image (disabled by default)
+
+### Fixed
+
+- Fixed incorrect detection of screens (init prefix handling)
+- Fixed detection of missing assets timing issue (validation now runs after indexing)
 
 ## [0.1.0] - 2026-03-27
 

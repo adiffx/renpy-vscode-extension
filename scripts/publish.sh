@@ -26,6 +26,11 @@ echo "Updated package.json"
 npm run compile
 npm run package
 
+# Commit and push
+git add -A
+git commit -m "$NEW_VERSION"
+git push
+
 echo ""
 echo "Package created: renpy-language-support-$NEW_VERSION.vsix"
 echo "Upload it at: https://marketplace.visualstudio.com/manage/publishers/adiffx"
