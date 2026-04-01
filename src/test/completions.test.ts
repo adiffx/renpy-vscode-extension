@@ -182,6 +182,59 @@ describe('Completion Suppression', () => {
 	});
 });
 
+describe('Space-triggered Completion Filtering', () => {
+	// When space is the trigger character, only show completions for jump/call
+	const shouldShowOnSpace = (lineContext: string): boolean => {
+		return /\b(jump|call)\s+$/.test(lineContext);
+	};
+
+	it('should show completions after "jump "', () => {
+		expect(shouldShowOnSpace('jump ')).toBe(true);
+		expect(shouldShowOnSpace('    jump ')).toBe(true);
+	});
+
+	it('should show completions after "call "', () => {
+		expect(shouldShowOnSpace('call ')).toBe(true);
+		expect(shouldShowOnSpace('    call ')).toBe(true);
+	});
+
+	it('should NOT show completions for leading whitespace', () => {
+		expect(shouldShowOnSpace('    ')).toBe(false);
+		expect(shouldShowOnSpace('        ')).toBe(false);
+	});
+
+	it('should NOT show completions after arbitrary words', () => {
+		expect(shouldShowOnSpace('show ')).toBe(false);
+		expect(shouldShowOnSpace('define ')).toBe(false);
+		expect(shouldShowOnSpace('label ')).toBe(false);
+		expect(shouldShowOnSpace('scene bg room ')).toBe(false);
+	});
+});
+
+describe('String Completion Suppression', () => {
+	function isInsideString(lineContext: string): boolean {
+		const doubleQuotes = (lineContext.match(/"/g) || []).length;
+		const singleQuotes = (lineContext.match(/'/g) || []).length;
+		return doubleQuotes % 2 === 1 || singleQuotes % 2 === 1;
+	}
+
+	it('should detect inside double-quoted string', () => {
+		expect(isInsideString('"hello ')).toBe(true);
+		expect(isInsideString('define x = "some text')).toBe(true);
+	});
+
+	it('should detect inside single-quoted string', () => {
+		expect(isInsideString("'hello ")).toBe(true);
+		expect(isInsideString("define x = 'some text")).toBe(true);
+	});
+
+	it('should NOT suppress outside strings', () => {
+		expect(isInsideString('define x = ')).toBe(false);
+		expect(isInsideString('"complete" ')).toBe(false);
+		expect(isInsideString("'complete' ")).toBe(false);
+	});
+});
+
 describe('Style Prefix Completion Context', () => {
 	const stylePrefixRegex = /\bstyle_prefix\s+["']?\w*$/;
 

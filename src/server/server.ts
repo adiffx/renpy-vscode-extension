@@ -1313,11 +1313,26 @@ connection.onHover((params: TextDocumentPositionParams): Hover | null => {
 });
 
 // Completion handler
-connection.onCompletion((params: TextDocumentPositionParams): CompletionItem[] => {
+connection.onCompletion((params): CompletionItem[] => {
 	const document = documents.get(params.textDocument.uri);
 	if (!document) return [];
 
 	const lineContext = getLineContext(document, params.position);
+
+	// If triggered by space, only show completions for specific contexts (jump/call)
+	if (params.context?.triggerCharacter === ' ') {
+		if (!lineContext.match(/\b(jump|call)\s+$/)) {
+			return [];
+		}
+	}
+
+	// Don't show completions inside strings
+	// Count quotes before cursor - if odd number, we're inside a string
+	const doubleQuotes = (lineContext.match(/"/g) || []).length;
+	const singleQuotes = (lineContext.match(/'/g) || []).length;
+	if (doubleQuotes % 2 === 1 || singleQuotes % 2 === 1) {
+		return [];
+	}
 
 	// Don't show completions after a complete namespace.member followed by space/=
 	// Pattern: word.identifier followed by whitespace or = (not still typing)
