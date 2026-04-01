@@ -8,6 +8,12 @@ I originally made this for myself after running into a few small annoyances with
 
 I kept adding things as I needed them while working on projects, and over time it just grew into something more complete. It’s still very much shaped by what I personally find useful, but it might be helpful to others too. It's powered by a proper language server (LSP), which makes features like navigation, diagnostics, and completions more consistent and reliable.
 
+## 🚀 Installation
+
+Install from [Ren'Py Magic from VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=adiffx.renpy-language-support)
+
+Or search for "**Ren'Py Magic**" in your Visual Studio Code Extension tab.
+
 ## ✨ Features
 
 ### 🎨 Syntax Highlighting
@@ -132,28 +138,16 @@ Real-time feedback with:
 
 * Mismatched quotes (including triple-quoted strings)
 
-## 🚀 Installation
-
-### From Source (Development)
+## 🛠 Development
 
 ```bash
-git clone <repo-url>
-cd <repo-folder>
+git clone https://github.com/adiffx/renpy-magic.git
+cd renpy-magic
 npm install
 npm run compile
 ```
 
 Then press `F5` in VS Code to launch the Extension Development Host.
-
-## 🧪 Usage
-
-1. Open a folder containing `.rpy` files
-2. Open any Ren’Py file
-3. The extension activates automatically
-
-> ⚠️ If you have another Ren’Py extension installed, disable it to avoid conflicts
-
-## 🛠 Development
 
 ### Running Tests
 
